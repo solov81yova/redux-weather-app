@@ -39,13 +39,6 @@ export const AppTitle = styled.span`
   color: ${colors.WHITE};
   cursor: pointer;
 `
-// export const HeaderLogo = styled.div`
-//   height: 100%;
-//   width: 80px;
-//   font-size: 24px;
-//   font-weight: 700;
-//   cursor: pointer;
-// `
 
 export const HeaderNav = styled.nav`
   display: flex;
