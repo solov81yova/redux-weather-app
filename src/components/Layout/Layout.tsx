@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom"
-import { WEATHER_APP_ROUTES } from "constants/routes"
-import { LayoutProps } from "./types"
 
+import { WEATHER_APP_ROUTES } from "constants/routes"
+
+import { LayoutProps } from "./types"
 import {
   LayoutWrapper,
   AppHeader,

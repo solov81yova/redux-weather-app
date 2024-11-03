@@ -10,6 +10,8 @@ export const PageWrapper = styled.div`
   padding: 20px;
   box-sizing: border-box;
   gap: 30px;
+  min-height: 200px;
+  max-height: calc(100vh - 90px);
 `
 export const SearchContainer = styled.div`
   display: flex;
@@ -23,6 +25,7 @@ export const SearchContainer = styled.div`
 `
 export const InputContainer = styled.div`
   width: 100%;
+  
 `
 
 export const CardContainer = styled.div`
@@ -43,3 +46,36 @@ export const WeatherNotFound = styled.p`
   text-align: center;
   margin-top: 40px;
 `
+export const SuccessModalWrapper = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+`;
+
+export const ModalInfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+`;
+
+export const ModalInfo = styled.div`
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+  color: purple;
+`;
+
+export const ModalIcon = styled.img`
+  width: 200px;
+  height: 200px;
+`;
+export const ErrorComponent = styled.p`
+  font-size: 32px;
+  color: red;
+  font-weight: bold;
+  text-align: center;
+  justify-content: center;
+`;

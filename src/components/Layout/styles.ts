@@ -15,9 +15,13 @@ export const LayoutWrapper = styled.div`
 `
 
 export const AppHeader = styled.header`
+  position: fixed;
+  top: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  z-index: 10;
   width: 100%;
   height: 80px;
   border-bottom: 1px solid #d2d2d2;
@@ -30,6 +34,10 @@ export const AppHeader = styled.header`
       rgba(18, 45, 77, 0.5)
     ),
     linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1));
+
+  &:hover {
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+  }
 `
 export const AppTitle = styled.span`
   font-size: 24px;
@@ -54,6 +62,7 @@ export const HeaderLink = styled(NavLink)`
   line-height: 24.2px;
   color: ${colors.WHITE};
   margin-right: 85px;
+  border-radius: 20px;
 
   &.active {
     font-weight: bold;
@@ -63,8 +72,10 @@ export const HeaderLink = styled(NavLink)`
 export const AppMain = styled.main`
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  margin-top: 80px;
   flex: 1;
   padding: 40px;
-  min-height: calc(100vh - 120px);
+  padding-top: 70px;
+  height: calc(100vh - 80px);
 `

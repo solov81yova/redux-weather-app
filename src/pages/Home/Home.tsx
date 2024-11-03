@@ -1,26 +1,137 @@
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react"
 
-import Button from "components/Button/Button";
-import Input from "components/Input/Input";
+import {
+  PageWrapper,
+  SearchContainer,
+  CardContainer,
+  SearchButtonContainer,
+  InputContainer,
+  SuccessModalWrapper,
+  ModalInfoContainer,
+  ModalInfo,
+} from "./styles"
 
-import { PageTitle, PageWrapper, ButtonControl } from "./styles";
+import { useAppDispatch, useAppSelector } from "store/hooks"
+import { ChangeEvent, useState } from "react"
+
+import Modal from "components/Modal/Modal"
+import Input from "components/Input/Input"
+import Button from "components/Button/Button"
+import Card from "components/Card/Card"
+import {
+  weatherSliceAction,
+  weatherSliceSelectors,
+} from "store/weatherApp/weatherAppSlice"
 
 function Home() {
-  const navigate = useNavigate();
+  const [cityName, setCityName] = useState<string>("")
 
-  const goBack = () => {
-    navigate(-1);
-  };
+  const appKey: string = "42f58ab4a7b3a4d34d19463542ce3b93"
+
+  const dispatch = useAppDispatch()
+  const { dataObj, error, isLoading, isModalOpened, messageModal } =
+    useAppSelector(weatherSliceSelectors.weathers)
+
+  const onChangeValue = (event: ChangeEvent<HTMLInputElement>) => {
+    console.log("Input value:", event.target.value)
+    // dispatch(weatherSliceAction.getCityName(event.target.value))
+    setCityName(event.target.value)
+  }
+
+  const getWeatherData = () => {
+    if (!cityName.trim()) {
+      alert("Please enter a city name")
+      return
+    }
+    dispatch(
+      weatherSliceAction.getWeatherData({ cityName: cityName, appKey }),
+    )
+  }
+
+  const closeModal = () => {
+    dispatch(weatherSliceAction.closeModal())
+  }
+
+  const clearCardWeather = () => {
+    dispatch(weatherSliceAction.delObjData())
+  }
+
+  const clearErrorCard = () => {
+    dispatch(weatherSliceAction.delError())
+  }
+
+  const saveCardWeather = () => {
+    dispatch(weatherSliceAction.saveWeatherData())
+  }
+
+  // useEffect(() => {
+  //   closeModal()
+  // }, [])
+
+  // useEffect(() => {
+  //   if (error) {
+  //     clearCardWeather()
+  //     closeModal()
+  //   }
+  // }, [error])
+  useEffect(() => {
+    if (dataObj || error) {
+      setCityName("")
+      closeModal()
+    }
+  }, [dataObj, error])
 
   return (
     <PageWrapper>
-      {/* <Input/> */}
- 
-      {/* <ButtonControl>
-        <Button name="Go back" onClick={goBack} />
-      </ButtonControl> */}
-    </PageWrapper>
-  );
-}
+      <SearchContainer>
+        <InputContainer>
+          <Input
+            value={cityName}
+            onChange={onChangeValue}
+            id="city_id"
+            name="city"
+            type="text"
+            placeholder="Enter city name"
+          />
+        </InputContainer>
+        <SearchButtonContainer>
+          <Button
+            type="button"
+            name="Search"
+            onClick={getWeatherData}
+            disabled={isLoading}
+          />
+        </SearchButtonContainer>
+      </SearchContainer>
 
-export default Home;
+      {!isModalOpened && (
+        <>
+          {dataObj ? (
+            <CardContainer>
+              <Card
+                CityWeather={dataObj}
+                isHomePage
+                onDelete={clearCardWeather}
+                onSave={saveCardWeather}
+              />
+            </CardContainer>
+          ) : (
+            error && <Card error={error} onDelete={clearErrorCard} />
+          )}
+        </>
+      )}
+
+      {isModalOpened && (
+        <Modal closeModal={closeModal}>
+          <SuccessModalWrapper>
+            <ModalInfoContainer>
+              <ModalInfo>{messageModal}</ModalInfo>
+              <Button name="Close Modal" onClick={closeModal} isCardButton />
+            </ModalInfoContainer>
+          </SuccessModalWrapper>
+        </Modal>
+      )}
+    </PageWrapper>
+  )
+}
+export default Home

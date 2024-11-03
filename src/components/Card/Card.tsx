@@ -1,4 +1,5 @@
 import Button from "components/Button/Button"
+
 import { CardProps } from "./types"
 import {
   PageWrapper,
@@ -6,14 +7,14 @@ import {
   ButtonControl,
   CardWrapper,
   CardCity,
-  CardDeegrees,
+  CardTemp,
   CardImg,
   CardItemContainer,
   CardContainer,
   CardImgContainer,
 } from "./styles"
 
-function Card({ CityWeather, isHomePage, error, onSave, onDelete }: CardProps) {
+function Card({ CityWeather, isHomePage, error, onDelete, onSave }: CardProps) {
   const urlIcon: string = `http://openweathermap.org/img/w/${CityWeather?.icon}.png`
   const celTemp: string = (Number(CityWeather?.temp) - 273.15).toFixed(0)
 
@@ -23,7 +24,7 @@ function Card({ CityWeather, isHomePage, error, onSave, onDelete }: CardProps) {
         <CardWrapper>
           <CardContainer>
             <CardItemContainer>
-              <CardDeegrees>{celTemp}°</CardDeegrees>
+              <CardTemp>{celTemp}°</CardTemp>
               <CardCity>{CityWeather.name}</CardCity>
             </CardItemContainer>
             <CardImgContainer>
@@ -34,19 +35,16 @@ function Card({ CityWeather, isHomePage, error, onSave, onDelete }: CardProps) {
           </CardContainer>
           <ButtonControl>
             <Button name="Delete" onClick={onDelete} isCardButton />
-
             {isHomePage && <Button name="Save" onClick={onSave} isCardButton />}
           </ButtonControl>
         </CardWrapper>
       ) : error ? (
-        <CardWrapper>
-          <CardContainer>
-            <WeathersNotFound>{error}</WeathersNotFound>
-          </CardContainer>
+        <WeathersNotFound>
+          {error}
           <ButtonControl>
             <Button name="Delete" onClick={onDelete} isCardButton />
           </ButtonControl>
-        </CardWrapper>
+        </WeathersNotFound>
       ) : (
         <WeathersNotFound></WeathersNotFound>
       )}
