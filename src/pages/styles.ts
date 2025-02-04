@@ -25,9 +25,7 @@ export const SearchContainer = styled.div`
 `
 export const InputContainer = styled.div`
   width: 100%;
-  
 `
-
 export const CardContainer = styled.div`
   display: flex;
   flex: 1;
@@ -52,30 +50,27 @@ export const SuccessModalWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   gap: 40px;
-`;
-
+`
 export const ModalInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 30px;
-`;
-
+`
 export const ModalInfo = styled.div`
   text-align: center;
   font-size: 40px;
   font-weight: bold;
   color: purple;
-`;
-
+`
 export const ModalIcon = styled.img`
   width: 200px;
   height: 200px;
-`;
+`
 export const ErrorComponent = styled.p`
   font-size: 32px;
   color: red;
   font-weight: bold;
   text-align: center;
   justify-content: center;
-`;
+`

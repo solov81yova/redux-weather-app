@@ -1,5 +1,4 @@
 import styled from "@emotion/styled"
-import { colors } from "styles/colors"
 
 export const ModalWrapper = styled.div`
   position: fixed;
@@ -12,7 +11,6 @@ export const ModalWrapper = styled.div`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
 `
-
 export const ModalComponent = styled.div`
   display: flex;
   flex-direction: column;

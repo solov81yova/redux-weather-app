@@ -1,4 +1,15 @@
-import { useEffect } from "react"
+import { ChangeEvent, useState, useEffect } from "react"
+
+import { useAppDispatch, useAppSelector } from "store/hooks"
+import {
+  weatherSliceAction,
+  weatherSliceSelectors,
+} from "store/weatherApp/weatherAppSlice"
+
+import Modal from "components/Modal/Modal"
+import Input from "components/Input/Input"
+import Button from "components/Button/Button"
+import Card from "components/Card/Card"
 
 import {
   PageWrapper,
@@ -11,18 +22,6 @@ import {
   ModalInfo,
 } from "./styles"
 
-import { useAppDispatch, useAppSelector } from "store/hooks"
-import { ChangeEvent, useState } from "react"
-
-import Modal from "components/Modal/Modal"
-import Input from "components/Input/Input"
-import Button from "components/Button/Button"
-import Card from "components/Card/Card"
-import {
-  weatherSliceAction,
-  weatherSliceSelectors,
-} from "store/weatherApp/weatherAppSlice"
-
 function Home() {
   const [cityName, setCityName] = useState<string>("")
 
@@ -33,8 +32,6 @@ function Home() {
     useAppSelector(weatherSliceSelectors.weathers)
 
   const onChangeValue = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log("Input value:", event.target.value)
-    // dispatch(weatherSliceAction.getCityName(event.target.value))
     setCityName(event.target.value)
   }
 
@@ -43,9 +40,7 @@ function Home() {
       alert("Please enter a city name")
       return
     }
-    dispatch(
-      weatherSliceAction.getWeatherData({ cityName: cityName, appKey }),
-    )
+    dispatch(weatherSliceAction.getWeatherData({ cityName: cityName, appKey }))
   }
 
   const closeModal = () => {
@@ -64,16 +59,6 @@ function Home() {
     dispatch(weatherSliceAction.saveWeatherData())
   }
 
-  // useEffect(() => {
-  //   closeModal()
-  // }, [])
-
-  // useEffect(() => {
-  //   if (error) {
-  //     clearCardWeather()
-  //     closeModal()
-  //   }
-  // }, [error])
   useEffect(() => {
     if (dataObj || error) {
       setCityName("")

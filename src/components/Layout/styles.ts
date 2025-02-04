@@ -13,7 +13,6 @@ export const LayoutWrapper = styled.div`
   background-position: center;
   background-repeat: no-repeat;
 `
-
 export const AppHeader = styled.header`
   position: fixed;
   top: 0;
@@ -47,14 +46,12 @@ export const AppTitle = styled.span`
   color: ${colors.WHITE};
   cursor: pointer;
 `
-
 export const HeaderNav = styled.nav`
   display: flex;
   gap: 30px;
   height: 100%;
   align-items: center;
 `
-
 export const HeaderLink = styled(NavLink)`
   font-size: 20px;
   text-decoration: none;
@@ -68,7 +65,6 @@ export const HeaderLink = styled(NavLink)`
     font-weight: bold;
   }
 `
-
 export const AppMain = styled.main`
   display: flex;
   justify-content: center;
